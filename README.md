@@ -1,4 +1,4 @@
-# Utilizando NLog con MonoDevelop en .NET</title>
+# Utilizando NLog con C# en .NET
 		
 <p align="justify">
 Para cualquier aplicación de software a nivel producción es indispensable tener un componente que escriba los eventos más significativos en una bitácora.
@@ -46,32 +46,32 @@ Como un primer acercamiento a su utilización, escribí una aplicación de conso
 </p>
 			<div><b>Fig. 1</b> crear un proyecto llamado HelloNlog</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig1.png" width="700">
+			<IMG src="images/fig1.png" width="700">
 </div><br>
 <p>
 			2-. Dentro del <b>Solution Explorer</b>  has click con el botón derecho y has click en <b>Add Packages</b> , entonces aparecerá la pantalla <b>Add Packages</b>, ya en esa pantalla usa el buscador para encontrar el paquete <b>Nlog</b>, y seleccionar los paquetes: <b>Nlog,</b> <b>Nlog Configuration</b> y <b>Npgsql</b> respectivamente, presionar el botón <b>Add Packages</b> para agregar los ensamblados al proyecto. 
 </p>
 			<div><b>Fig. 2</b> seleccionar los paquetes Nlog y Nlog Configuration</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig2.png" width="700">
+			<IMG src="images/fig2.png" width="700">
 </div><br>
 			<div>3-.  Ahora que ya se tiene una estructura en la solución como se muestra en la siguiente imagen:</div>
 			<div><b>Fig. 3</b> la estructura de la solución con los ensamblados.</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig3.png" width="700">
+			<IMG src="images/fig3.png" width="700">
 </div><br>
 			<div>4-. Agregar al proyecto una clase llamada <b>NloggerWrapper</b></div>
 			<div>5-. Bien ahora hay que completar el  código de la clase Program.</div>
 			<div>6-. Antes de ejecutar la solución es muy importante editar el archivo <b>Nlog.conf</b> para agregar <b>targets</b> (objetivos), <b>layouts</b> (disposición)  y <b>rules</b> (reglas). Aquí el código del archivo <b>Nlog.conf</b> del proyecto.</div>
 			<div>
-			<IMG src="picture_library/NLog/nlogconfig.png">
+			<IMG src="images/nlogconfig.png">
 </div><br>
 			<h2>Targets</h2>
 			<p align="justify">
 			En este archivo de configuración defino tres <b>targets</b>, el primero hacia un archivo, el segundo hacia una consola con salida de color y el último hacia una consola de salida normal.
 			</p>
 			<div>
-			<IMG src="picture_library/NLog/targets.png">
+			<IMG src="images/targets.png">
 </div><br>
 			<div>Para ver completa la lista de targets consultar el enlace: <a href="https://github.com/NLog/NLog/wiki/Targets">https://github.com/NLog/NLog/wiki/Targets</a></div>
 			<h2>Layouts</h2>
@@ -79,7 +79,7 @@ Como un primer acercamiento a su utilización, escribí una aplicación de conso
 			Por cierta comodidad y porque así es la manera predeterminada de ver la información, puse los <b>layouts</b> de la siguiente manera:
 			</p>
 			<div>
-			<IMG src="picture_library/NLog/targets.png">
+			<IMG src="images/targets.png">
 </div><br>
 			<p align="justify">
 			Se especifica un <b>layout</b> por cada uno de los <b>targets</b> Para más información de los <b>layouts</b> ver el siguiente enlace:  <a href="https://github.com/NLog/NLog/wiki/Layout-Renderers">https://github.com/NLog/NLog/wiki/Layout-Renderers</a>
@@ -89,7 +89,7 @@ Como un primer acercamiento a su utilización, escribí una aplicación de conso
 Ahora la configuración para las rules, aquí con el '*' le indico que ese nivel se use para todos los logs, únicamente en los niveles <b>Error</b> y <b>Fatal</b> escriban hacia el <b>target</b> llamado fileLog que es el <b>target</b> que escribe hacia un archivo de texto, en la segunda regla indico igual que para todos logs, los niveles Trace se escriban hacia el log llamado consoleLog que tiene la salida normal de consola y por último le indico que para los niveles <b>Warn</b> y <b>Info</b> escriban hacia el log de la consola con colores.
 </p>
 <div>
-			<IMG src="picture_library/NLog/rules.png">
+			<IMG src="images/rules.png">
 </div>
 <br>
 <p>
@@ -98,12 +98,12 @@ Ahora la configuración para las rules, aquí con el '*' le indico que ese nivel
 			<div>8-. Antes de ejecutar el programa, en el <b>Solution Explorer</b> haz click derecho sobre la solución después haz click en options, aparecerá la ventana <b>Project Options</b> ahí seleccionar las opciones <b>run on external console</b> y <b>pause console output</b>.</div>
 			<div><b>Fig. 4</b> opciones para ejecutar el proyecto.</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig4.png" width="700">
+			<IMG src="images/fig4.png" width="700">
 </div><br>
 			<div>Bien al ejecutar el programa este solicita una cadena de conexión desde el inicio:</div>
 			<div><b>Fig. 5</b> el programa solicita una cadena de conexión.</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig5.png" width="700">
+			<IMG src="images/fig5.png" width="700">
 </div><br>
 <p align="justify">
 			Errores como si la cadena de conexión no tiene un formato correcto, el servidor <b>Postgresql</b> esta abajo o no existe la base de datos, etc. Son encerrados dentro por un bloque <b>try/catch</b> y enviados al método <b>LogException</b> para que <b>Nlog</b> utilice el level correspondiente y lo mande hacia el target.
@@ -124,24 +124,24 @@ Ahora la configuración para las rules, aquí con el '*' le indico que ese nivel
 			<div>En este código dependiendo del tipo de excepción utiliza un nivel (level) de <b>Nlog</b> para escribir.</div>
 			<div><b>Fig. 6</b> el programa con <b>Nlog</b> muestra las excepciones en la consola con color..</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig6.png" width="700">
+			<IMG src="images/fig6.png" width="700">
 </div><br>
 			<div><b>Fig. 7</b> excepción atrapada por Nlog que se muestra en color.</div><br>  
 			<div>
-			<IMG src="picture_library/NLog/fig7.png" width="700">
+			<IMG src="images/fig7.png" width="700">
 </div><br>
 			<p align="justify">
 			Cuando  uno de los <b>target</b> como en este ejemplo esta dirigido a escribir en archivo se puede revisar la creación del archivo y posteriormente su contenido.
 			</p>
 			<div><b>Fig. 8</b>  la creación de los archivos log con el target File.</div><br>  
 			<div>
-			<IMG src="picture_library/NLog/fig8.png" width="700">
+			<IMG src="images/fig8.png" width="700">
 </div><br>
 			<div><b>Fig. 9</b>  el formato de los archivos log.</div><br>  
 			<div>
-			<IMG src="picture_library/NLog/fig9.png" width="700">
+			<IMG src="images/fig9.png" width="700">
 </div><br>
 			<div><b>Fig. 10</b> la ejecucción del programa sin errores</div><br>
 			<div>
-			<IMG src="picture_library/NLog/fig10.png" width="700">
+			<IMG src="images/fig10.png" width="700">
 </div>
